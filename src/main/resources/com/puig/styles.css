@@ -1,0 +1,98 @@
+/* Estilos generales */
+.root {
+    -fx-background-color: #f0f4f8;
+    -fx-font-family: "Arial";
+}
+
+/* Estilos para el encabezado */
+.header {
+    -fx-background-color: #007bff;
+    -fx-padding: 10;
+}
+
+/* Estilos para etiquetas */
+.label-text {
+    -fx-font-size: 24px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #343a40;
+}
+
+.label-subtext {
+    -fx-font-size: 18px;
+    -fx-text-fill: #6c757d;
+}
+
+/* Estilos para botones */
+.button-primary {
+    -fx-background-color: #007bff;
+    -fx-text-fill: white;
+    -fx-font-size: 16px;
+    -fx-padding: 10px 20px;
+    -fx-border-radius: 5px;
+    -fx-background-radius: 5px;
+}
+
+.button-primary:hover {
+    -fx-background-color: #0056b3;
+}
+
+.button-secondary {
+    -fx-background-color: #6c757d;
+    -fx-text-fill: white;
+    -fx-font-size: 16px;
+    -fx-padding: 10px 20px;
+    -fx-border-radius: 5px;
+    -fx-background-radius: 5px;
+}
+
+.button-secondary:hover {
+    -fx-background-color: #5a6268;
+}
+
+/* Estilos para campos de entrada */
+.input-field {
+    -fx-padding: 10;
+    -fx-border-color: #ced4da;
+    -fx-border-radius: 5px;
+    -fx-background-radius: 5px;
+}
+
+/* Estilos para el área de resultados */
+.resultado-text {
+    -fx-font-size: 18px;
+    -fx-text-fill: #2c3e50;
+}
+
+/* Estilos para el contenedor de comidas */
+.comidas-container {
+    -fx-spacing: 10;
+    -fx-alignment: center;
+}
+
+/* Estilos para el contenedor de pedidos */
+.pedidos-container {
+    -fx-spacing: 10;
+    -fx-alignment: center;
+}
+
+/* Estilos para el contenedor de estadísticas */
+.estadisticas-container {
+    -fx-spacing: 10;
+    -fx-alignment: center;
+}
+
+/* Estilos para la lista */
+.list-view {
+    -fx-background-color: #ffffff;
+    -fx-border-color: #ced4da;
+    -fx-border-radius: 5px;
+    -fx-background-radius: 5px;
+}
+
+/* Estilos para el gráfico de pastel */
+.pie-chart {
+    -fx-background-color: #ffffff;
+    -fx-border-color: #ced4da;
+    -fx-border-radius: 5px;
+    -fx-background-radius: 5px;
+}
