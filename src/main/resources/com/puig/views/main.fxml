@@ -10,37 +10,55 @@
         <HBox spacing="10" styleClass="header">
             <Button text="Inicio" onAction="#showHome" styleClass="button-primary"/>
             <Button text="Comidas" onAction="#showComidas" styleClass="button-primary"/>
-            <Button text="Pedidos" onAction="#showPedidos" styleClass="button-primary"/>
+            <Button text="Carrito de compras" onAction="#showCarrito" styleClass="button-primary"/>
             <Button text="Estadísticas" onAction="#showEstadisticas" styleClass="button-primary"/>
+            <Button text="Gestion de comida" onAction="#showAdmin" styleClass="button-primary"/>
         </HBox>
     </top>
     <center>
         <StackPane fx:id="dynamicContent">
             <!-- Contenido dinámico -->
-            <VBox fx:id="homeContent" spacing="10" alignment="CENTER">
+            <VBox fx:id="homeContent" spacing="20" alignment="CENTER">
                 <ImageView fx:id="logoImage" fitWidth="200" fitHeight="200" />
                 <Label text="Bienvenido a la Cantina App" styleClass="label-text"/>
                 <Label text="¡Disfruta de la mejor comida!" styleClass="label-subtext"/>
+                <HBox spacing="20" alignment="CENTER">
+                    <VBox spacing="10" alignment="CENTER">
+                        <Label text="Cupones disponibles" styleClass="label-text"/>
+                        <ListView fx:id="cuponesListView" styleClass="list-view" prefHeight="100"/>
+                    </VBox>
+                    <VBox spacing="10" alignment="CENTER">
+                        <Label text="Platos favoritos" styleClass="label-text"/>
+                        <ListView fx:id="favoritosListView" styleClass="list-view" prefHeight="100"/>
+                    </VBox>
+                    <VBox spacing="10" alignment="CENTER">
+                        <Label text="Platos más pedidos" styleClass="label-text"/>
+                        <ListView fx:id="masPedidosListView" styleClass="list-view" prefHeight="100"/>
+                    </VBox>
+                </HBox>
             </VBox>
-            <VBox fx:id="comidasContent" spacing="10" alignment="CENTER" visible="false">
+            <VBox fx:id="comidasContent" spacing="20" alignment="CENTER" visible="false">
+                <Label text="Comidas" styleClass="label-text"/>
+                <ListView fx:id="comidasListView" styleClass="list-view"/>
+                <Button text="Agregar al Carrito" onAction="#agregarAlCarrito" styleClass="button-secondary"/>
+            </VBox>
+            <VBox fx:id="carritoContent" spacing="20" alignment="CENTER" visible="false">
+                <Label text="Carrito de compras" styleClass="label-text"/>
+                <ListView fx:id="carritoListView" styleClass="list-view"/>
+                <Label fx:id="totalCarritoLabel" text="Total: $0.00" styleClass="label-text"/>
+                <Button text="Confirmar Pedido" onAction="#confirmarPedido" styleClass="button-secondary"/>
+            </VBox>
+            <VBox fx:id="estadisticasContent" spacing="20" alignment="CENTER" visible="false">
+                <Label text="Estadísticas de Ventas" styleClass="label-text"/>
+                <PieChart fx:id="estadisticasPieChart" styleClass="pie-chart"/>
+                <Button text="Actualizar Estadísticas" onAction="#actualizarEstadisticas" styleClass="button-secondary"/>
+            </VBox>
+            <VBox fx:id="adminContent" spacing="20" alignment="CENTER" visible="false">
                 <Label text="Gestión de Comidas" styleClass="label-text"/>
                 <TextField fx:id="nombreComidaField" promptText="Nombre de la comida" styleClass="input-field"/>
                 <TextField fx:id="precioComidaField" promptText="Precio (ej: 5.99)" styleClass="input-field"/>
                 <TextArea fx:id="descripcionComidaField" promptText="Descripción" styleClass="input-field"/>
                 <Button text="Agregar Comida" onAction="#agregarComida" styleClass="button-secondary"/>
-                <ListView fx:id="comidasListView" styleClass="list-view"/>
-            </VBox>
-            <VBox fx:id="pedidosContent" spacing="10" alignment="CENTER" visible="false">
-                <Label text="Realizar Pedido" styleClass="label-text"/>
-                <Button text="Agregar al Pedido" onAction="#agregarAlPedido" styleClass="button-secondary"/>
-                <ListView fx:id="pedidosListView" styleClass="list-view"/>
-                <Label fx:id="totalPedidoLabel" text="Total: $0.00" styleClass="label-text"/>
-                <Button text="Confirmar Pedido" onAction="#confirmarPedido" styleClass="button-secondary"/>
-            </VBox>
-            <VBox fx:id="estadisticasContent" spacing="10" alignment="CENTER" visible="false">
-                <Label text="Estadísticas de Ventas" styleClass="label-text"/>
-                <PieChart fx:id="estadisticasPieChart" styleClass="pie-chart"/>
-                <Button text="Actualizar Estadísticas" onAction="#actualizarEstadisticas" styleClass="button-secondary"/>
             </VBox>
         </StackPane>
     </center>

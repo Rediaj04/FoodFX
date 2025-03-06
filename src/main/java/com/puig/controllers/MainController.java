@@ -22,10 +22,13 @@ public class MainController {
     private VBox comidasContent;
 
     @FXML
-    private VBox pedidosContent;
+    private VBox carritoContent;
 
     @FXML
     private VBox estadisticasContent;
+
+    @FXML
+    private VBox adminContent;
 
     @FXML
     private TextField nombreComidaField;
@@ -40,13 +43,22 @@ public class MainController {
     private ListView<Comida> comidasListView;
 
     @FXML
-    private ListView<Comida> pedidosListView;
+    private ListView<Comida> carritoListView;
+
+    @FXML
+    private ListView<String> cuponesListView;
+
+    @FXML
+    private ListView<Comida> favoritosListView;
+
+    @FXML
+    private ListView<Comida> masPedidosListView;
 
     @FXML
     private PieChart estadisticasPieChart;
 
     @FXML
-    private Label totalPedidoLabel;
+    private Label totalCarritoLabel;
 
     @FXML
     private ImageView logoImage;
@@ -60,7 +72,35 @@ public class MainController {
         comidasListView.getItems().addAll(
                 new Comida("Hamburguesa", 5.99, "Hamburguesa clásica con queso"),
                 new Comida("Pizza", 8.99, "Pizza de pepperoni"),
-                new Comida("Ensalada", 4.99, "Ensalada fresca")
+                new Comida("Ensalada", 4.99, "Ensalada fresca"),
+                new Comida("Tacos", 3.99, "Tacos de carne asada"),
+                new Comida("Sushi", 12.99, "Sushi variado"),
+                new Comida("Pasta", 7.99, "Pasta alfredo"),
+                new Comida("Pollo Frito", 6.99, "Pollo frito crujiente"),
+                new Comida("Burrito", 5.49, "Burrito de pollo"),
+                new Comida("Sopa", 4.49, "Sopa de pollo"),
+                new Comida("Sandwich", 4.99, "Sandwich de jamón y queso"),
+                new Comida("Helado", 2.99, "Helado de vainilla"),
+                new Comida("Brownie", 3.49, "Brownie de chocolate"),
+                new Comida("Café", 1.99, "Café americano")
+        );
+
+        cuponesListView.getItems().addAll(
+                "10% de descuento en tu primer pedido",
+                "2x1 en hamburguesas los viernes",
+                "15% de descuento en pedidos mayores a $20"
+        );
+
+        favoritosListView.getItems().addAll(
+                new Comida("Pizza", 8.99, "Pizza de pepperoni"),
+                new Comida("Sushi", 12.99, "Sushi variado"),
+                new Comida("Hamburguesa", 5.99, "Hamburguesa clásica con queso")
+        );
+
+        masPedidosListView.getItems().addAll(
+                new Comida("Hamburguesa", 5.99, "Hamburguesa clásica con queso"),
+                new Comida("Pizza", 8.99, "Pizza de pepperoni"),
+                new Comida("Tacos", 3.99, "Tacos de carne asada")
         );
     }
 
@@ -68,32 +108,45 @@ public class MainController {
     private void showHome() {
         homeContent.setVisible(true);
         comidasContent.setVisible(false);
-        pedidosContent.setVisible(false);
+        carritoContent.setVisible(false);
         estadisticasContent.setVisible(false);
+        adminContent.setVisible(false);
     }
 
     @FXML
     private void showComidas() {
         homeContent.setVisible(false);
         comidasContent.setVisible(true);
-        pedidosContent.setVisible(false);
+        carritoContent.setVisible(false);
         estadisticasContent.setVisible(false);
+        adminContent.setVisible(false);
     }
 
     @FXML
-    private void showPedidos() {
+    private void showCarrito() {
         homeContent.setVisible(false);
         comidasContent.setVisible(false);
-        pedidosContent.setVisible(true);
+        carritoContent.setVisible(true);
         estadisticasContent.setVisible(false);
+        adminContent.setVisible(false);
     }
 
     @FXML
     private void showEstadisticas() {
         homeContent.setVisible(false);
         comidasContent.setVisible(false);
-        pedidosContent.setVisible(false);
+        carritoContent.setVisible(false);
         estadisticasContent.setVisible(true);
+        adminContent.setVisible(false);
+    }
+
+    @FXML
+    private void showAdmin() {
+        homeContent.setVisible(false);
+        comidasContent.setVisible(false);
+        carritoContent.setVisible(false);
+        estadisticasContent.setVisible(false);
+        adminContent.setVisible(true);
     }
 
     @FXML
@@ -117,27 +170,27 @@ public class MainController {
     }
 
     @FXML
-    private void agregarAlPedido() {
+    private void agregarAlCarrito() {
         Comida comidaSeleccionada = comidasListView.getSelectionModel().getSelectedItem();
         if (comidaSeleccionada != null) {
             pedidoActual.agregarComida(comidaSeleccionada);
-            pedidosListView.getItems().add(comidaSeleccionada);
-            totalPedidoLabel.setText("Total: $" + String.format("%.2f", pedidoActual.getTotal()));
+            carritoListView.getItems().add(comidaSeleccionada);
+            totalCarritoLabel.setText("Total: $" + String.format("%.2f", pedidoActual.getTotal()));
         }
     }
 
     @FXML
     private void confirmarPedido() {
         if (pedidoActual.getComidas().isEmpty()) {
-            mostrarError("No hay comidas en el pedido");
+            mostrarError("No hay comidas en el carrito");
             return;
         }
 
         mostrarMensaje("Pedido confirmado. Total: $" + String.format("%.2f", pedidoActual.getTotal()));
         historialPedidos.add(pedidoActual);
         pedidoActual = new Pedido();
-        pedidosListView.getItems().clear();
-        totalPedidoLabel.setText("Total: $0.00");
+        carritoListView.getItems().clear();
+        totalCarritoLabel.setText("Total: $0.00");
     }
 
     @FXML
