@@ -68,7 +68,10 @@ public class MainController {
 
     @FXML
     private void initialize() {
+        // Configuración inicial de la imagen del logo
         logoImage.setImage(new Image(getClass().getResourceAsStream("/com/puig/images/logo.png")));
+
+        // Agregar comidas a la lista de comidas
         comidasListView.getItems().addAll(
                 new Comida("Hamburguesa", 5.99, "Hamburguesa clásica con queso"),
                 new Comida("Pizza", 8.99, "Pizza de pepperoni"),
@@ -85,18 +88,21 @@ public class MainController {
                 new Comida("Café", 1.99, "Café americano")
         );
 
+        // Agregar cupones a la lista de cupones
         cuponesListView.getItems().addAll(
                 "10% de descuento en tu primer pedido",
                 "2x1 en hamburguesas los viernes",
                 "15% de descuento en pedidos mayores a $20"
         );
 
+        // Agregar comidas favoritas a la lista de favoritos
         favoritosListView.getItems().addAll(
                 new Comida("Pizza", 8.99, "Pizza de pepperoni"),
                 new Comida("Sushi", 12.99, "Sushi variado"),
                 new Comida("Hamburguesa", 5.99, "Hamburguesa clásica con queso")
         );
 
+        // Agregar comidas más pedidas a la lista de más pedidos
         masPedidosListView.getItems().addAll(
                 new Comida("Hamburguesa", 5.99, "Hamburguesa clásica con queso"),
                 new Comida("Pizza", 8.99, "Pizza de pepperoni"),
@@ -104,6 +110,7 @@ public class MainController {
         );
     }
 
+    // Métodos para mostrar diferentes secciones de la interfaz
     @FXML
     private void showHome() {
         homeContent.setVisible(true);
@@ -149,12 +156,14 @@ public class MainController {
         adminContent.setVisible(true);
     }
 
+    // Método para agregar una nueva comida a la lista de comidas
     @FXML
     private void agregarComida() {
         String nombre = nombreComidaField.getText();
         String precioText = precioComidaField.getText();
         String descripcion = descripcionComidaField.getText();
 
+        // Validar que el precio sea un número válido
         if (!Pattern.matches("\\d+(\\.\\d{1,2})?", precioText)) {
             mostrarError("El precio debe ser un número válido (ej: 5.99)");
             return;
@@ -164,11 +173,13 @@ public class MainController {
         Comida nuevaComida = new Comida(nombre, precio, descripcion);
         comidasListView.getItems().add(nuevaComida);
 
+        // Limpiar los campos de texto
         nombreComidaField.clear();
         precioComidaField.clear();
         descripcionComidaField.clear();
     }
 
+    // Método para agregar una comida seleccionada al carrito
     @FXML
     private void agregarAlCarrito() {
         Comida comidaSeleccionada = comidasListView.getSelectionModel().getSelectedItem();
@@ -179,6 +190,7 @@ public class MainController {
         }
     }
 
+    // Método para confirmar el pedido actual
     @FXML
     private void confirmarPedido() {
         if (pedidoActual.getComidas().isEmpty()) {
@@ -193,6 +205,7 @@ public class MainController {
         totalCarritoLabel.setText("Total: $0.00");
     }
 
+    // Método para actualizar las estadísticas de ventas
     @FXML
     private void actualizarEstadisticas() {
         Map<String, Long> conteoComidas = historialPedidos.stream()
@@ -203,6 +216,7 @@ public class MainController {
         conteoComidas.forEach((nombre, conteo) -> estadisticasPieChart.getData().add(new PieChart.Data(nombre, conteo)));
     }
 
+    // Método para mostrar un mensaje de error
     private void mostrarError(String mensaje) {
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle("Error");
@@ -211,6 +225,7 @@ public class MainController {
         alert.showAndWait();
     }
 
+    // Método para mostrar un mensaje informativo
     private void mostrarMensaje(String mensaje) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("Información");
